@@ -2,7 +2,9 @@
 
 
     var   logd = require('./')
-        , TestClass = require('ee-class');
+        , log  = require('ee-log')
+        , TestClass = require('ee-class')
+        , Transport = require('logd-transport');
 
 
     var log = require('ee-log');
@@ -12,7 +14,7 @@
     var myModule = logd.module('test');
 
 
-
+    logd.transport.use(new Transport()).env('all').levels('all');
 
 
     var X = new TestClass({
