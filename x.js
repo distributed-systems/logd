@@ -7,6 +7,6 @@ const log = logd.module('x');
 
 module.exports = {
     do() {
-        log.info('aaaaaa');
+        log.info('aaaaaa', new Error('sex'));
     }
 }
