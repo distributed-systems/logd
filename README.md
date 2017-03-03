@@ -2,7 +2,7 @@
 
 Simple, elegegant and felxible logging.
 
-- Suppoorts different log transports (Console, File, Mail, SQL)
+- Send your logs to any target (Console, File, Mail, SQL)
 - Log routing: different levels can be sent to different transports
 - Log data & metrics
 - Explore your logs interactively (filtering, selective output)
@@ -14,6 +14,9 @@ Simple, elegegant and felxible logging.
 [![node](https://img.shields.io/node/v/logd.svg?style=flat-square)](https://nodejs.org/)
 
 
+## Using Logd
+
+
 ## API
 
 ### Internal log format
@@ -23,6 +26,12 @@ Logs are stored as JS Objects and serialized as JSON.
 {}
 
 ##
+
+    ## module syntax
+    const logd = require('logd');
+    const myModule = logd.module('aws-s3-bucket');
+
+
 
 
     // this is what you do in your application main file
@@ -177,3 +186,42 @@ Logs are stored as JS Objects and serialized as JSON.
 
 
 the cli can trace single metric instances, it can jump forward an backward between them
+
+
+
+
+
+
+
+
+# application level
+
+
+
+    const Logd = require('logd');
+
+
+
+    Logd.use(new MailTransport()).env('live').level.gte('warn');
+
+
+
+    const log = require('logd').module('related');
+
+
+
+
+    log.event('user-registred', {});
+
+
+
+    log.warn('hui');
+
+
+
+    --log-level=warn+ --log-sink=std --log-module=related,distributed
+
+
+
+
+log.uid(reuest.uid).info();

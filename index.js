@@ -1,8 +1,7 @@
-!function() {
-    
+{
+    'use strict';
 
-    var LogD = require('./lib/Logd');
 
-    // export singleton instance
-	module.exports = new LogD();
-}();
+    // export it from the module
+	module.exports = require('./lib/Logd');
+};
