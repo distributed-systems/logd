@@ -4,7 +4,7 @@
     , "version"                     : "0.1.0"
     , "homepage"                    : "https://github.com/eventEmitter/logd"
     , "author"                      : "Michael van der Weg <michael@joinbox.com> (http://joinbox.com/)"
-    , "licence"                     : "MIT"
+    , "license"                     : "MIT"
     , "repository": {
           "url"                     : "https://github.com/eventEmitter/logd.git"
         , "type"                    : "git"
@@ -16,15 +16,11 @@
         "url"                       : "https://github.com/eventEmitter/logd/issues"
     }
     , "dependencies": {
-          "ee-class"                : "1.x.x"
-        , "ee-event-emitter"        : "0.1.x"
-        , "ee-types"                : "0.1.x"
-        , "ee-log"                  : "0.3.x"
+          "ee-log"                  : "0.3.x"
         , "envr"                    : "0.1.x"
-        , "ee-argv"                 : "0.1.x"
     }
     , "devDependencies": {
-          "mocha"                   : "1.17.x"
+          "mocha"                   : "3.x"
     }
     , "optionalDependencies": {}
     , "keywords"                    : []
