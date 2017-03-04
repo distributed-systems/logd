@@ -17,6 +17,8 @@ Simple, elegegant and felxible logging.
 ## Using Logd
 
 
+
+
 ## API
 
 ### Internal log format
