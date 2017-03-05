@@ -2,6 +2,10 @@
     'use strict';
 
 
+    const Logd = require('./lib/Logd');
+
+
+
     // export it from the module
-	module.exports = require('./lib/Logd');
+	module.exports = new Logd();
 };
