@@ -1,5 +1,7 @@
 # logd
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/eventEmitter/logd.svg)](https://greenkeeper.io/)
+
 Simple, elegegant and felxible logging.
 
 - Send your logs to any target (Console, File, Mail, SQL)
