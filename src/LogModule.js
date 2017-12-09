@@ -14,7 +14,7 @@
 
 
     // the singleton nanalyzer
-    // can eb used as singleton
+    // can be used as singleton
     const callsite = new Callsite();
 
 
@@ -178,8 +178,8 @@
                     return new MessageWrapper(message);
                 }
 
-                // let th euser manipulate non messages as well
-                // since th elevel or the module could be disbaled
+                // let the user manipulate non messages as well
+                // since the level or the module could be disbaled
                 return new MessageWrapper();
             }
         }
@@ -332,14 +332,14 @@
         */
         isArgvEnabled() {
             if (this.argvEnabled === null) {
-                if (process.argv.includes('--l')) return true;
-                else if (process.argv.includes(`--l:${this.moduleName}`)) this.argvEnabled = true;
+                if (process.argv.includes('--l') || process.argv.includes('--log')) return true;
+                else if (process.argv.includes(`--l(?:og-module)?(?::|=)${this.moduleName}`)) this.argvEnabled = true;
                 else {
 
                     // check if i'm enabled via the argv 
                     // object, also if it has additional 
                     // parameter added to it
-                    this.argvEnabled = process.argv.some(arg => new RegExp(`--l:${this.moduleName}`, 'gi').test(arg));
+                    this.argvEnabled = process.argv.some(arg => new RegExp(`--l(?:og-module)?(?::|=)${this.moduleName}`, 'gi').test(arg));
                 }
             }
 
@@ -363,7 +363,7 @@
         */
         hasEnabledChild(childName) {
             if (!this.enabledChildren.has(childName)) {
-                this.enabledChildren.set(childName, process.argv.some(arg => new RegExp(`--l:${this.moduleName}.*(?:\\+children|\\+${childName}).*`, 'gi').test(arg) && !new RegExp(`--l:${this.moduleName}.*-${childName}.*`, 'gi').test(arg))); 
+                this.enabledChildren.set(childName, process.argv.some(arg => new RegExp(`--l(?:og-module)?(?::|=)${this.moduleName}.*(?:\\+children|\\+${childName}).*`, 'gi').test(arg) && !new RegExp(`--l(?:og-module)?(?::|=)${this.moduleName}.*-${childName}.*`, 'gi').test(arg))); 
             }
 
             return this.enabledChildren.get(childName);

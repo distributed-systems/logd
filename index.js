@@ -2,7 +2,7 @@
     'use strict';
 
 
-    const Logd = require('./lib/Logd');
+    const Logd = require('./src/Logd');
 
 
 

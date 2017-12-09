@@ -50,6 +50,9 @@
 
     module.exports = class Logd {
 
+
+
+
     	constructor() {
 
 
@@ -64,19 +67,21 @@
             this.transportManager = new TransportManager(this);
                 
 
-
-            // check which log levels are enabled
-            this.getEnabledLogLevels();   
-
-
-
-
-
-    		// we0re retruning a function so that the user
+    		// were retruning a function so that the user
     		// can print random stuff to the console
     		const instance = (...items) => {
 
     		}
+
+
+            // need to be able to acces this instance 
+            // from within functions 
+            this.instance = instance;
+
+
+
+            // check which log levels are enabled
+            this.getEnabledLogLevels();  
 
 
     		// since it0s a bad idea to change the 
@@ -86,7 +91,13 @@
     		// a singleton the performance should be ok
     		instance.level = this.level.bind(this);
     		instance.transport = this.transport.bind(this);
-    		instance.module = this.module.bind(this);
+            instance.module = this.module.bind(this);
+
+
+            // the user should be able to create new isntances
+            instance.createInstance = () => {
+                return new Logd();
+            }
 
 
 
@@ -112,18 +123,18 @@
 
             // check if the user passed a custom offset
             process.argv.forEach((arg) => {
-                const parts = /^--l-level:(?:([0-9]+)|([a-z0-9]+))([\+\-]*)$/gi.exec(arg);
+                const parts = /^--l(:?og)?-level(:?:|=)(?:([0-9]+)|([a-z0-9]+))([\+\-]*)$/gi.exec(arg);
                 if (parts) {
                     let level;
+                    
+                    if (parts[4] && this.logLevels.some(l => l.name === parts[4])) level = this.logLevels.find(l => l.name === parts[4]).level;
+                    if (parts[3]) level = parseInt(parts[3], 10);
 
-                    if (parts[2] && this.logLevels.some(l => l.name === parts[2])) level = this.logLevels.find(l => l.name === parts[2]).level;
-                    if (parts[1]) level = parseInt(parts[1], 10);
-
-                    if (level) {
-                        if (parts[3] === '-') {
+                    if (level !== undefined) {
+                        if (parts[5] === '-') {
                             this.levelTo = level;
                             this.levelFrom = 0;
-                        } else if (parts[3] === '+') {
+                        } else if (parts[5] === '+') {
                             this.levelFrom = level;
                             this.levelTo = 100;
                         } else {
@@ -133,6 +144,9 @@
                     } else throw new Error(`Failed to determine loglevel, accepting level, level+, level-, number, got ${arg}`);
                 }
             });
+
+            this.instance.levelFrom = this.levelFrom;
+            this.instance.levelTo = this.levelTo;
         }
 
 

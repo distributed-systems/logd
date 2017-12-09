@@ -30,6 +30,7 @@
             callsite.method        = frame.getMethodName();
             callsite.fileName      = frame.getFileName();
             callsite.lineNumber    = frame.getLineNumber();
+            callsite.message       = frame.toString();
 
             return callsite;
         }

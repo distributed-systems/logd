@@ -4,7 +4,7 @@
     const logd = require('./');
 
 
-    const Transport = require('./lib/Transport');
+    const Transport = require('./src/Transport');
     const ConsoleTransport = class extends Transport {
         message(message) {
             eelog(message);
