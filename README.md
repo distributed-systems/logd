@@ -5,10 +5,10 @@ A powerful modular logging facility for node.js
 Core features:
 
 - Completely modular: log messages are packed into JSON objects and can be sent anywhere
-- Routing: log messages with different lvels can be sent to different targets
+- Routing: log messages with different levels can be sent to different targets
 - Log source: log messages are tagged with the file and line where it was created
 - Configurable output: the output of messages can be limited to certain levels
-- Namespaces: all messages are part of user defiend namespace, the aoutput can be filtered by them
+- Namespaces: all messages are part of user defined namespace which can be used for filtering
 
 
 
@@ -23,7 +23,7 @@ In the main file of your application or library, import the module, define a
 namespace and set a transport for the log output.
 
     import logd from 'logd';
-    import ConsoleTransport fron 'logd-console-transport';
+    import ConsoleTransport from 'logd-console-transport';
 
 
     // if this isn't code loaded by another application
@@ -41,11 +41,11 @@ namespace and set a transport for the log output.
 
     // you may pass as many arguments as you like 
     // to the log methods
-    log.error('somethong went wrong', err, {some: 'data'});
+    log.error('something went wrong', err, {some: 'data'});
 
 
-    // if you just wnat to output temporary logs to the console
+    // if you just want to output temporary logs to the console
     // that are not sent to any transport you may pass
-    // directly data to the modulel by invoking it directly
+    // directly data to the module by invoking it directly
     log(err, {an: 'object'}, 'direct to console logging ftw ;)');
 
