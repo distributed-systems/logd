@@ -1,6 +1,6 @@
 # logd
 
-A powerful modular logging facility.
+A powerful modular logging facility for node.js
 
 Core features:
 
