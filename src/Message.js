@@ -29,7 +29,7 @@
 
 
          /**
-        * lets the user mark the message withan uid
+        * lets the user mark the message with an uid
         *
         * @param {string} uid
         *

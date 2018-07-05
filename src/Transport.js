@@ -100,7 +100,7 @@
         * @returns {object} this
         */
         level(...levels) {
-            assert(!this.locked, 'cannot add level, the transport was registred on the logd instance and cannot modiefed anymore$!');
+            assert(!this.locked, 'cannot add level, the transport was registered on the logd instance and cannot modified anymore!');
 
             // remove the default
             if (this.levels[0].default) this.levels.shift();

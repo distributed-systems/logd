@@ -199,7 +199,7 @@
         * determined if this module is currently active
         * and if the logs should be sent to the transports
         *
-        * checks also if any of the parrents ie enabled, or disabled
+        * checks also if any of the parents is enabled, or disabled
         * depending if this module was explicitly activated or implicitly.
         * if a parent is enabled, and the the --children flags was
         * passed this module shall be enabled, if this module was explicitly

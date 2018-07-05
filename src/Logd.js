@@ -38,6 +38,15 @@
     }, {
           name: 'error'
         , level: 80
+    }, {
+          name: 'wtf'
+        , level: 100
+    }, {
+          name: 'highlight'
+        , level: 100
+    }, {
+          name: 'success'
+        , level: 100
     }];
 
 
@@ -160,9 +169,9 @@
 
 
         /**
-        * handles log messages that were emittedd
+        * handles log messages that were emitted
         *
-        * @param {object} message the messagfe to transmit
+        * @param {object} message the message to transmit
         */ 
         sendLogMessage(message) {
             this.getTransportManager().sendMessage(message);
