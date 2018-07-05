@@ -1,7 +1,7 @@
 {
     "name": "logd",
     "description": "A powerful modular logging facility for node.js",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "homepage": "https://github.com/distributed-systems/logd",
     "author": "Michael van der Weg <michael@joinbox.com> (http://joinbox.com/)",
     "license": "MIT",
@@ -17,11 +17,11 @@
     },
     "dependencies": {
         "app-root-path": "^2.1.0",
-        "uuid": "^3.1.0"
+        "uuid": "^3.3.2"
     },
     "devDependencies": {
         "ee-log": "0.3.x",
-        "section-tests": "^1.3.0"
+        "section-tests": "^1.3.1"
     },
     "optionalDependencies": {},
     "keywords": [
