@@ -333,17 +333,15 @@
         isArgvEnabled() {
             if (this.argvEnabled === null) {
                 if (process.argv.includes('--l') || process.argv.includes('--log')) return true;
-                else if (process.argv.includes(`--l(?:og-module)?(?::|=)${this.moduleName}`)) this.argvEnabled = true;
-                else if (process.argv.includes(`--l(?:og-module)?(?::|=)\*`)) this.argvEnabled = true;
                 else {
 
                     // check if i'm enabled via the argv 
                     // object, also if it has additional 
                     // parameter added to it
-                    this.argvEnabled = process.argv.some(arg => new RegExp(`--l(?:og-module)?(?::|=)${this.moduleName}`, 'gi').test(arg));
+                    this.argvEnabled = process.argv.some(arg => new RegExp(`--l(?:og-module)?(?::|=)(?:${this.moduleName}|\\*)`, 'gi').test(arg));
                 }
             }
-
+            
             return this.argvEnabled;
         }
 
