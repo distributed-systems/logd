@@ -334,6 +334,7 @@
             if (this.argvEnabled === null) {
                 if (process.argv.includes('--l') || process.argv.includes('--log')) return true;
                 else if (process.argv.includes(`--l(?:og-module)?(?::|=)${this.moduleName}`)) this.argvEnabled = true;
+                else if (process.argv.includes(`--l(?:og-module)?(?::|=)*`)) this.argvEnabled = true;
                 else {
 
                     // check if i'm enabled via the argv 
