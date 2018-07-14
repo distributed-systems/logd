@@ -28,10 +28,17 @@
             this.type = 'error';
             this.name = err.name;
             this.message = err.message;
-            this.frames = callsite.getFromError(err).map(frame => callsite.convertStackFrame(frame)).map(frame => {
-                if (frame.fileName) frame.fileName = this.truncatePath(frame.fileName);
-                return frame;
-            });
+
+            const frames = callsite.getFromError(err);
+
+            if (Array.isArray(frames)) {
+                this.frames = frames.map(frame => callsite.convertStackFrame(frame)).map(frame => {
+                    if (frame.fileName) frame.fileName = this.truncatePath(frame.fileName);
+                    return frame;
+                });
+            } else {
+                this.frames = frames;
+            }
         }
 
 
