@@ -4,6 +4,7 @@
 
     const assert            = require('assert');
     const uuidV4            = require('uuid/v4');
+    const log               = require('ee-log');
 
 
     const Callsite          = require('./Callsite');
@@ -49,11 +50,25 @@
             // via asrgv, or rootModule
             this.moduleIsEnabled = null;
 
+            // create a function that can used to log directly to the terminal
+            // it should only be used for debugging purposes!
+            const instance = (...args) => {
+                log.info(...args);
+            }
 
+            // publish also public methods on that function
+            instance.isEnabled = this.isEnabled.bind(this);
+            instance.getName = this.getName.bind(this);
+            instance.hasEnabledChild = this.hasEnabledChild.bind(this);
+
+            
             // add log functions
             for (const level of this.logLevels) {
-                this.addLoglevelHandler(level);
+                this.addLoglevelHandler(level, instance);
             }
+
+
+            return instance;
         }
 
 
@@ -137,7 +152,7 @@
         *
         * @returns {object} this
         */
-        addLoglevelHandler(level) {
+        addLoglevelHandler(level, instance) {
             assert(typeof level === 'object', 'level must be an object');
             assert(typeof level.name === 'string', 'level.name must be a string');
             assert(/^[a-z][a-zA-Z0-9]*$/g.test(level.name), 'level.name must only contain a-z and 0-9. 0-9 is not allowed as first charachter')
@@ -157,7 +172,7 @@
 
 
 
-            this[level.name] = (...args) => {
+            instance[level.name] = this[level.name] = (...args) => {
 
                 // make sure not to user resources when
                 // we're not enabled

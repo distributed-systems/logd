@@ -72,6 +72,7 @@ section('Log Messages', (section) => {
         // get the message fron the test transport
         const message = await transport.getMessage();
 
+//console.log(message);
 
         // validate
         assert(message, 'missing log message');
