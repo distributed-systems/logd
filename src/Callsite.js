@@ -21,17 +21,25 @@
         * @returns {object} frame
         */
         convertStackFrame(frame) {
-            assert(typeof frame === 'object', 'the callsite must be an object');
-
             const callsite = {};
 
-            callsite.type          = frame.getTypeName();
-            callsite.function      = frame.getFunctionName();
-            callsite.method        = frame.getMethodName();
-            callsite.fileName      = frame.getFileName();
-            callsite.lineNumber    = frame.getLineNumber();
-            callsite.character     = frame.getColumnNumber();
-            callsite.message       = frame.toString();
+            if (typeof frame === 'object') {
+                callsite.type          = frame.getTypeName();
+                callsite.function      = frame.getFunctionName();
+                callsite.method        = frame.getMethodName();
+                callsite.fileName      = frame.getFileName();
+                callsite.lineNumber    = frame.getLineNumber();
+                callsite.character     = frame.getColumnNumber();
+                callsite.message       = frame.toString();
+            } else {
+                callsite.type          = null;
+                callsite.function      = null;
+                callsite.method        = null;
+                callsite.fileName      = 'n/a';
+                callsite.lineNumber    = '';
+                callsite.character     = '';
+                callsite.message       = '-';
+            }
 
             return callsite;
         }
@@ -53,8 +61,8 @@
         * @returns {array} stack
         */
         getFromError(err, slice = 0, limit = 20) {
-            assert(err, 'expected an error obejct');
-            assert(err instanceof Error, 'expected an error obejct');
+            assert(err, 'expected an error object');
+            assert(err instanceof Error, 'expected an error object');
 
             // return unqiue files
             return this.getCallSite(slice, limit, err);
