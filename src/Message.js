@@ -17,11 +17,12 @@
 
     module.exports = class Message {
 
-        constructor(type) {
+        constructor(type, moduleName) {
             assert(typeof type === 'string', 'the type must be a string');
             assert(type.length, 'the type must be a string with non zero length!');
 
             this.type = type;
+            this.moduleName = moduleName;
 
             // a message may contain several junks of data
             this.data = [];
@@ -128,3 +129,4 @@
         }
     }
 }
+

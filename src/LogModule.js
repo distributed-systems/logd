@@ -106,8 +106,8 @@
         *
         * @returns {object} message
         */
-        createMessage({type, level, args, callSite}) {
-            const message = new Message(type);
+        createMessage({type, level, args, callSite, moduleName}) {
+            const message = new Message(type, moduleName);
 
 
 
@@ -122,7 +122,7 @@
 
             // add optional parameters to the message
             if (args) {
-                assert(Array.isArray(args), 'args have to eb an array!');
+                assert(Array.isArray(args), 'args have to be an array!');
 
                 for (const arg of args) {
 
@@ -177,9 +177,10 @@
                 // make sure not to user resources when
                 // we're not enabled
                 if (this.isEnabled() && level.level >= levelFrom && level.level <= levelTo) {
-                    const type      = 'message';
-                    const callSite  = callsite.getCaller(1);
-                    const message   = this.createMessage({callSite, type, level, args});
+                    const type = 'message';
+                    const callSite = callsite.getCaller(1);
+                    const moduleName = this.moduleName; 
+                    const message = this.createMessage({callSite, type, level, args, moduleName});
 
 
                     // transmit in next cycle, this leaves the user a chance
