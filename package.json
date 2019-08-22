@@ -1,7 +1,7 @@
 {
     "name": "logd",
     "description": "A powerful modular logging facility for node.js",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "homepage": "https://github.com/distributed-systems/logd",
     "author": "Lina van der Weg <lina@vanderweg.ch> (http://joinbox.com/)",
     "license": "MIT",
@@ -16,9 +16,9 @@
         "url": "https://github.com/distributed-systems/logd/issues"
     },
     "dependencies": {
-        "app-root-path": "^2.1.0",
+        "app-root-path": "^2.2.1",
         "ee-log": "^0.3.11",
-        "uuid": "^3.3.2"
+        "uuid": "^3.3.3"
     },
     "devDependencies": {
         "@joinbox/eslint-config-joinbox": "^1.0.8",
