@@ -1,4 +1,4 @@
 
-export interface Transport {
+export default class Transport {
     constructor(): Transport;
 }

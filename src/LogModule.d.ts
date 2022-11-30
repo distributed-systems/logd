@@ -1,5 +1,5 @@
 
-export interface LogModule {
+export default class LogModule {
     constructor(): LogModule;
     log(...args: any[]): void;
     debug(...args: any[]): void;
