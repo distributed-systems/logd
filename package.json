@@ -1,7 +1,7 @@
 {
     "name": "logd",
     "description": "A powerful modular logging facility for node.js",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "homepage": "https://github.com/distributed-systems/logd",
     "author": "Lina van der Weg <lina@vanderweg.ch> (http://joinbox.com/)",
     "license": "MIT",
