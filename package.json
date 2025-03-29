@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "error-stack-parser": "^2.1.4",
-        "logd-console-output": "^3.0.1"
+        "logd-console-output": "^3.0.3"
     },
     "devDependencies": {
         "@tsconfig/node22": "^22.0.1",

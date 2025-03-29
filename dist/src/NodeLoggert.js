@@ -21,7 +21,6 @@ export default class NodeLogger extends Logger {
                 const callsite = message.getCallsite();
                 callsite?.setFileName(this.truncatePath(callsite?.fileName ?? ''));
             }
-            // @ts-ignore
             this.consoleOutput.log({ message });
         }
     }
