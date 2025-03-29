@@ -1,6 +1,5 @@
 import Logger from './Logger.js';
-import LogMessage from './LogMessage.js';
-import { levels } from './LogMessage.js';
+import LogMessage, { levels } from './LogMessage.js';
 
 let ConsoleOuput: typeof import('logd-console-output').default;
 if (typeof window === 'undefined') {

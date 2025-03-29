@@ -1,4 +1,4 @@
 theme-test.js
 tsconfig.json
-src/
+./src/
 test.js
