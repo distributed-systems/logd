@@ -1,5 +1,5 @@
 import Logger from './Logger.js';
-import LogMessage, { LogLevel } from './LogMessage.js';
+import LogMessage, { levels, LogLevel } from './LogMessage.js';
 import { StackFrame } from 'error-stack-parser';
 
 export default class BrowserLogger extends Logger {
@@ -15,6 +15,38 @@ export default class BrowserLogger extends Logger {
         ['wtf', 'magenta.bold.bgWhite'],
         ['default', 'blue.bold']
     ]);
+
+    private _logsEnabled: boolean = false;
+    private _enabledLogLevel: number = 0;
+
+
+    constructor() {
+        super();
+
+        // @ts-ignore
+        window.logd = {
+            enable: (level?: string) => {
+                this._logsEnabled = true;
+                if (level) {
+                    const levelConfig = levels.find(l => l.level === level);
+                    if (levelConfig) {
+                        this._enabledLogLevel = levelConfig.value;
+                    }
+                }
+            },
+            disable: () => {
+                this._logsEnabled = false;
+            },
+        };
+    }
+
+    public getEnabledLogLevel() : number {
+        return this._enabledLogLevel;
+    }
+
+    public logsEnabled() : boolean {
+        return this._logsEnabled;
+    }
 
     public log(message: LogMessage): void {
         // Create a timestamp in the format: dd HH:MM:SS.mss

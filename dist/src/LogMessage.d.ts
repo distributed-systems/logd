@@ -4,6 +4,8 @@ interface LogLevelConfiguration {
     level: LogLevel;
     value: number;
 }
+declare const levels: LogLevelConfiguration[];
+export { levels };
 export default class LogMessage {
     private readonly logLevel;
     private readonly values;
@@ -17,5 +19,4 @@ export default class LogMessage {
     getModuleName(): string;
     getLogLevel(): LogLevelConfiguration;
 }
-export {};
 //# sourceMappingURL=LogMessage.d.ts.map

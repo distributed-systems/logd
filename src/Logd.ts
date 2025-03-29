@@ -22,15 +22,19 @@ export default class Logd {
     }
 
 
-
     public module(name: string) {
         return new LogdModule(this, name);
     }
 
 
-
-
     public logMessage(message: LogMessage) {
+        const logsEnabled = this.logger.logsEnabled();
+        if (!logsEnabled) return;
+
+        const enabledLogLevel = this.logger.getEnabledLogLevel();
+        const messageLogLevel = message.getLogLevel().value;
+        if (messageLogLevel < enabledLogLevel) return
+
         const frames = ErrorStackParser.parse(new Error('reference'));
         if (frames.length > 2) message.setCallsite(frames[2]);
         this.logger.log(message);

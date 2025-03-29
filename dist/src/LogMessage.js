@@ -9,6 +9,7 @@ const levels = [
     { level: 'success', value: 80 },
     { level: 'highlight', value: 90 }
 ];
+export { levels };
 export default class LogMessage {
     logLevel;
     values;

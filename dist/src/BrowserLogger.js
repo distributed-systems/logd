@@ -1,4 +1,5 @@
 import Logger from './Logger.js';
+import { levels } from './LogMessage.js';
 export default class BrowserLogger extends Logger {
     // Colors mapping similar to the terminal, using chalk-like strings.
     colors = new Map([
@@ -12,6 +13,32 @@ export default class BrowserLogger extends Logger {
         ['wtf', 'magenta.bold.bgWhite'],
         ['default', 'blue.bold']
     ]);
+    _logsEnabled = false;
+    _enabledLogLevel = 0;
+    constructor() {
+        super();
+        // @ts-ignore
+        window.logd = {
+            enable: (level) => {
+                this._logsEnabled = true;
+                if (level) {
+                    const levelConfig = levels.find(l => l.level === level);
+                    if (levelConfig) {
+                        this._enabledLogLevel = levelConfig.value;
+                    }
+                }
+            },
+            disable: () => {
+                this._logsEnabled = false;
+            },
+        };
+    }
+    getEnabledLogLevel() {
+        return this._enabledLogLevel;
+    }
+    logsEnabled() {
+        return this._logsEnabled;
+    }
     log(message) {
         // Create a timestamp in the format: dd HH:MM:SS.mss
         const now = new Date();

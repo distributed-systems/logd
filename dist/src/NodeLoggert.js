@@ -1,4 +1,5 @@
 import Logger from './Logger.js';
+import { levels } from './LogMessage.js';
 let ConsoleOuput;
 if (typeof window === 'undefined') {
     ConsoleOuput = (await import('logd-console-output')).default;
@@ -6,11 +7,48 @@ if (typeof window === 'undefined') {
 export default class NodeLogger extends Logger {
     consoleOutput;
     queue = [];
+    _logsEnabled;
+    _enabledLogLevel;
     constructor() {
         super();
         if (!this.consoleOutput) {
             this.consoleOutput = new ConsoleOuput();
         }
+    }
+    // checks if logging is enabled
+    logsEnabled() {
+        if (this._logsEnabled !== undefined)
+            return this._logsEnabled;
+        this._logsEnabled = process.argv.includes('--log') || process.argv.includes('--l');
+        return this._logsEnabled;
+    }
+    getEnabledLogLevel() {
+        if (this._enabledLogLevel !== undefined) {
+            return this._enabledLogLevel;
+        }
+        // process argv examples --level=debug 
+        const level = process.argv.find(arg => arg.startsWith('--level='));
+        if (level) {
+            const levelName = level.replace('--level=', '');
+            const levelConfig = levels.find(l => l.level === levelName);
+            if (levelConfig) {
+                this._enabledLogLevel = levelConfig.value;
+                return levelConfig.value;
+            }
+        }
+        // check for level like --warn
+        for (const arg of process.argv) {
+            if (arg.startsWith('--')) {
+                const levelName = arg.replace('--', '');
+                const levelConfig = levels.find(l => l.level === levelName);
+                if (levelConfig) {
+                    this._enabledLogLevel = levelConfig.value;
+                    return levelConfig.value;
+                }
+            }
+        }
+        this._enabledLogLevel = 0;
+        return 0;
     }
     log(message) {
         if (!this.consoleOutput) {

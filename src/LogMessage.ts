@@ -19,6 +19,8 @@ const levels : LogLevelConfiguration[] = [
     { level: 'highlight', value: 90 }
 ];
 
+export { levels };
+
 export default class LogMessage {
 
     private readonly logLevel: LogLevel;

@@ -1,5 +1,6 @@
 import Logger from './Logger.js';
 import LogMessage from './LogMessage.js';
+import { levels } from './LogMessage.js';
 
 let ConsoleOuput: typeof import('logd-console-output').default;
 if (typeof window === 'undefined') {
@@ -12,6 +13,8 @@ export default class NodeLogger extends Logger {
 
     private readonly consoleOutput: InstanceType<typeof import('logd-console-output').default>;
     private readonly queue: LogMessage[] = [];
+    private _logsEnabled: boolean | undefined;
+    private _enabledLogLevel: number | undefined;
 
     constructor() {
         super();
@@ -20,6 +23,47 @@ export default class NodeLogger extends Logger {
         }
     }
 
+    // checks if logging is enabled
+    public logsEnabled() : boolean {
+        if (this._logsEnabled !== undefined) return this._logsEnabled;
+        
+        this._logsEnabled = process.argv.includes('--log') || process.argv.includes('--l');
+
+        return this._logsEnabled;
+    }
+
+
+    public getEnabledLogLevel() : number {
+        if (this._enabledLogLevel !== undefined) {
+            return this._enabledLogLevel;
+        }
+
+        // process argv examples --level=debug 
+        const level = process.argv.find(arg => arg.startsWith('--level='));
+        if (level) {
+            const levelName = level.replace('--level=', '');
+            const levelConfig = levels.find(l => l.level === levelName);
+            if (levelConfig) {
+                this._enabledLogLevel = levelConfig.value;
+                return levelConfig.value;
+            }
+        }
+
+        // check for level like --warn
+        for (const arg of process.argv) {
+            if (arg.startsWith('--')) {
+                const levelName = arg.replace('--', '');
+                const levelConfig = levels.find(l => l.level === levelName);
+                if (levelConfig) {
+                    this._enabledLogLevel = levelConfig.value;
+                    return levelConfig.value;
+                }
+            }
+        }
+
+        this._enabledLogLevel = 0;
+        return 0;
+    }
 
 
     public log(message: LogMessage) : void {
