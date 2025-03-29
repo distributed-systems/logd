@@ -1,0 +1,1 @@
+{"version":3,"file":"BrowserLogger.d.ts","sourceRoot":"","sources":["../../src/BrowserLogger.ts"],"names":[],"mappings":"AAAA,OAAO,MAAM,MAAM,aAAa,CAAC;AACjC,OAAO,UAAwB,MAAM,iBAAiB,CAAC;AAGvD,MAAM,CAAC,OAAO,OAAO,aAAc,SAAQ,MAAM;IAE7C,OAAO,CAAC,QAAQ,CAAC,MAAM,CAUpB;IAEI,GAAG,CAAC,OAAO,EAAE,UAAU,GAAG,IAAI;IA6BrC;;;OAGG;IACH,OAAO,CAAC,gBAAgB;CAoB3B"}

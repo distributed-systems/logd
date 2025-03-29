@@ -1,13 +1,24 @@
-import Logd from "./src/Logd.js";
-import Message from './src/Message.js';
-import Transport from "./src/Transport.js";
+import Logd from './src/Logd.js';
 
+let logd : Logd;
+if (typeof window !== 'undefined') {
+    // @ts-ignore
+    if (!window.__logd) {
+        // @ts-ignore
+        window.__logd = new Logd();
+    }
+    // @ts-ignore
+    logd = window.__logd;
+} else {
+    // @ts-ignore
+    if (!global.__logd) {
+        // @ts-ignore
+        global.__logd = new Logd();
+    }
+    // @ts-ignore
+    logd =  global.__logd;
+}
 
-let instance : Logd = new Logd();
-
-export default instance;
-export { Transport, Message };
-
-//instance.transport(new TestTransport());
-
-//instance.module('test').success('test');
+export default logd;
+import LogMessage from './src/LogMessage.js';
+export { LogMessage };

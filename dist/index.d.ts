@@ -1,7 +1,6 @@
-import Logd from "./src/Logd.js";
-import Message from './src/Message.js';
-import Transport from "./src/Transport.js";
-declare let instance: Logd;
-export default instance;
-export { Transport, Message };
+import Logd from './src/Logd.js';
+declare let logd: Logd;
+export default logd;
+import LogMessage from './src/LogMessage.js';
+export { LogMessage };
 //# sourceMappingURL=index.d.ts.map
