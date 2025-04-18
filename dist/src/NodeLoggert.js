@@ -64,7 +64,7 @@ export default class NodeLogger extends Logger {
     }
     truncatePath(path) {
         const projectroot = this.dirname(process.argv.length > 1 ? process.argv[1] : process.cwd());
-        path = path.replace(projectroot + '/', '');
+        path = path.replace('file://', '').replace(projectroot + '/', '');
         let index = path.indexOf('node_modules');
         if (index > -1) {
             path = path.substring(index);

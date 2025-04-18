@@ -1,4 +1,4 @@
-import { StackFrame } from 'error-stack-parser';
+import ErrorStackParser, { StackFrame } from 'error-stack-parser';
 
 export type LogLevel = 'debug' | 'notice' | 'info' | 'warn' | 'error' | 'fatal' | 'wtf' | 'success' | 'highlight';
 
