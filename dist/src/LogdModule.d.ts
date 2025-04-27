@@ -2,8 +2,11 @@ import Logd from './Logd.js';
 export default class LogdModule {
     private readonly logd;
     private readonly name;
-    constructor(logd: Logd, name: string);
+    private readonly data;
+    constructor(logd: Logd, name: string, data?: any);
+    child(data: any): LogdModule;
     log(...items: any[]): void;
+    trace(...items: any[]): void;
     debug(...items: any[]): void;
     notice(...items: any[]): void;
     info(...items: any[]): void;

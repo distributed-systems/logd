@@ -9,15 +9,25 @@ export default class LogdModule {
 
     private readonly logd: Logd;
     private readonly name: string;
-
-    constructor(logd: Logd, name: string) {
+    private readonly data: any;
+    constructor(logd: Logd, name: string, data?: any) {
         this.logd = logd;
         this.name = name;
+        this.data = data;
     }
+
+    public child(data: any) {
+        return new LogdModule(this.logd, this.name, { ...this.data, ...data });
+    }
+
 
 
     public log(...items: any[]) {
         this.logd.logMessage(new LogMessage(this.name, 'info', items));
+    }
+
+    public trace(...items: any[]) {
+        this.logd.logMessage(new LogMessage(this.name, 'debug', items));
     }
 
     public debug(...items: any[]) {
