@@ -21,6 +21,10 @@ export default class LogdModule {
     }
 
 
+    public getData() {
+        return this.data;
+    }
+
 
     public log(...items: any[]) {
         this.logd.logMessage(new LogMessage(this.name, 'info', items));

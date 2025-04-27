@@ -11,6 +11,9 @@ export default class LogdModule {
     child(data) {
         return new LogdModule(this.logd, this.name, { ...this.data, ...data });
     }
+    getData() {
+        return this.data;
+    }
     log(...items) {
         this.logd.logMessage(new LogMessage(this.name, 'info', items));
     }

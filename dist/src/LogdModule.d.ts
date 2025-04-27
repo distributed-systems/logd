@@ -5,6 +5,7 @@ export default class LogdModule {
     private readonly data;
     constructor(logd: Logd, name: string, data?: any);
     child(data: any): LogdModule;
+    getData(): any;
     log(...items: any[]): void;
     trace(...items: any[]): void;
     debug(...items: any[]): void;
