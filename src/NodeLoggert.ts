@@ -1,23 +1,27 @@
 import Logger from './Logger.js';
 import LogMessage, { levels } from './LogMessage.js';
 
-let ConsoleOuput: typeof import('logd-console-output').default;
-if (typeof window === 'undefined') {
-    ConsoleOuput = (await import('logd-console-output')).default;
+let ConsoleOuput: typeof import('logd-console-output').default | undefined;
+
+// Only attempt to import in Node.js environment
+if (typeof window === 'undefined' && typeof process !== 'undefined') {
+    import('logd-console-output').then(module => {
+        ConsoleOuput = module.default;
+    }).catch(err => {
+        console.error('Failed to load logd-console-output:', err);
+    });
 }
-
-
 
 export default class NodeLogger extends Logger {
 
-    private readonly consoleOutput: InstanceType<typeof import('logd-console-output').default>;
+    private readonly consoleOutput: InstanceType<typeof import('logd-console-output').default> | undefined;
     private readonly queue: LogMessage[] = [];
     private _logsEnabled: boolean | undefined;
     private _enabledLogLevel: number | undefined;
 
     constructor() {
         super();
-        if (!this.consoleOutput) {
+        if (typeof window === 'undefined' && typeof process !== 'undefined' && ConsoleOuput) {
             this.consoleOutput = new ConsoleOuput();
         }
     }

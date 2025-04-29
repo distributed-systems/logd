@@ -1,8 +1,13 @@
 import Logger from './Logger.js';
 import { levels } from './LogMessage.js';
 let ConsoleOuput;
-if (typeof window === 'undefined') {
-    ConsoleOuput = (await import('logd-console-output')).default;
+// Only attempt to import in Node.js environment
+if (typeof window === 'undefined' && typeof process !== 'undefined') {
+    import('logd-console-output').then(module => {
+        ConsoleOuput = module.default;
+    }).catch(err => {
+        console.error('Failed to load logd-console-output:', err);
+    });
 }
 export default class NodeLogger extends Logger {
     consoleOutput;
@@ -11,7 +16,7 @@ export default class NodeLogger extends Logger {
     _enabledLogLevel;
     constructor() {
         super();
-        if (!this.consoleOutput) {
+        if (typeof window === 'undefined' && typeof process !== 'undefined' && ConsoleOuput) {
             this.consoleOutput = new ConsoleOuput();
         }
     }
