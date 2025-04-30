@@ -6,6 +6,21 @@ import LogMessage from './LogMessage.js';
 export default class Logger {
 
 
+    private loaded: boolean = false;
+
+    public async load() : Promise<void> {
+        if (this.loaded) return;
+        this.loaded = true;
+    }
+
+    public setLoaded() {
+        this.loaded = true;
+    }
+
+    public isLoaded() : boolean {
+        return this.loaded;
+    }
+
     public log(message: LogMessage) : void {
         throw new Error('Method not implemented.');
     }

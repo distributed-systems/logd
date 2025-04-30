@@ -5,9 +5,11 @@ import ErrorStackParser from 'error-stack-parser';
 export default class Logd {
     env = typeof process !== 'undefined' ? 'node' : 'browser';
     logger;
+    messageQueue = [];
     constructor() {
         if (this.env === 'node') {
             this.logger = new NodeLogger();
+            this.logger.load();
         }
         else {
             this.logger = new BrowserLogger();
@@ -27,7 +29,18 @@ export default class Logd {
         const frames = ErrorStackParser.parse(new Error('reference'));
         if (frames.length > 2)
             message.setCallsite(frames[2]);
-        this.logger.log(message);
+        if (this.logger.isLoaded()) {
+            if (this.messageQueue.length > 0) {
+                for (const msg of this.messageQueue) {
+                    this.logger.log(msg);
+                }
+                this.messageQueue.length = 0;
+            }
+            this.logger.log(message);
+        }
+        else {
+            this.messageQueue.push(message);
+        }
     }
 }
 //# sourceMappingURL=Logd.js.map

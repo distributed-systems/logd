@@ -1,4 +1,16 @@
 export default class Logger {
+    loaded = false;
+    async load() {
+        if (this.loaded)
+            return;
+        this.loaded = true;
+    }
+    setLoaded() {
+        this.loaded = true;
+    }
+    isLoaded() {
+        return this.loaded;
+    }
     log(message) {
         throw new Error('Method not implemented.');
     }

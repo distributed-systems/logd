@@ -12,10 +12,12 @@ export default class Logd {
 
     private readonly env : Env = typeof process !== 'undefined' ? 'node' : 'browser';
     private readonly logger: Logger;
+    private readonly messageQueue: LogMessage[] = [];
 
     constructor() {
         if (this.env === 'node') {
             this.logger = new NodeLogger();
+            this.logger.load();
         } else {
             this.logger = new BrowserLogger();
         }
@@ -33,10 +35,22 @@ export default class Logd {
 
         const enabledLogLevel = this.logger.getEnabledLogLevel();
         const messageLogLevel = message.getLogLevel().value;
-        if (messageLogLevel < enabledLogLevel) return
+        if (messageLogLevel < enabledLogLevel) return;
 
         const frames = ErrorStackParser.parse(new Error('reference'));
         if (frames.length > 2) message.setCallsite(frames[2]);
-        this.logger.log(message);
+
+        if (this.logger.isLoaded()) {
+            if (this.messageQueue.length > 0) {
+                for (const msg of this.messageQueue) {
+                    this.logger.log(msg);
+                }
+                this.messageQueue.length = 0;
+            }
+            
+            this.logger.log(message);
+        } else {
+            this.messageQueue.push(message);
+        }
     }
 }
