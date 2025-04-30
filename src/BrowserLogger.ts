@@ -78,7 +78,6 @@ export default class BrowserLogger extends Logger {
         const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
         const timestamp = `${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
 
-
         // Get the module name and values to log
         const moduleName = message.getModuleName();
         const values = message.getValues();
@@ -90,8 +89,16 @@ export default class BrowserLogger extends Logger {
         // Build the formatted prefix
         const logPrefix = `${timestamp} [${moduleName}]:`;
 
-        // Use %c to apply our custom style to the prefix text
-        console.log(`%c${logPrefix}`, style, ...values);
+        // Apply the same style to all values
+        const styledValues = values.map(value => {
+            if (typeof value === 'string') {
+                return `%c${value}`;
+            }
+            return value;
+        });
+
+        // Use %c to apply our custom style to all text
+        console.log(`%c${logPrefix}`, style, ...styledValues.map(v => typeof v === 'string' ? style : v));
     }
 
     /**
