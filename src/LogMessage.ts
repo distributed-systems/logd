@@ -34,6 +34,11 @@ export default class LogMessage {
         this.values = values;
     }
 
+
+    public hasErrorObject() : boolean {
+        return this.values.some(value => value instanceof Error);
+    }
+
     public setCallsite(callsite: StackFrame) {
         this.callsite = callsite;
     }

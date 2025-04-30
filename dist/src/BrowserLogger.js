@@ -65,9 +65,6 @@ export default class BrowserLogger extends Logger {
         const seconds = String(now.getSeconds()).padStart(2, '0');
         const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
         const timestamp = `${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
-        // Get callsite info if available
-        const callsite = message.getCallsite();
-        const location = callsite ? `${callsite.fileName}:${callsite.lineNumber}` : 'unknown';
         // Get the module name and values to log
         const moduleName = message.getModuleName();
         const values = message.getValues();
@@ -75,7 +72,7 @@ export default class BrowserLogger extends Logger {
         const logLevel = message.getLogLevel().level;
         const style = this.getStyleForLevel(logLevel);
         // Build the formatted prefix
-        const logPrefix = `${timestamp} > ${location} : [${moduleName}]:`;
+        const logPrefix = `${timestamp} [${moduleName}]:`;
         // Use %c to apply our custom style to the prefix text
         console.log(`%c${logPrefix}`, style, ...values);
     }

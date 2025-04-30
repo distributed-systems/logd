@@ -12,6 +12,7 @@ export default class LogMessage {
     private readonly moduleName;
     private callsite;
     constructor(moduleName: string, logLevel: LogLevel, values: any[]);
+    hasErrorObject(): boolean;
     setCallsite(callsite: StackFrame): void;
     getCallsite(): StackFrame | undefined;
     hasCallsite(): boolean;

@@ -20,6 +20,9 @@ export default class LogMessage {
         this.logLevel = logLevel;
         this.values = values;
     }
+    hasErrorObject() {
+        return this.values.some(value => value instanceof Error);
+    }
     setCallsite(callsite) {
         this.callsite = callsite;
     }

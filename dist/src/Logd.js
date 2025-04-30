@@ -21,16 +21,20 @@ export default class Logd {
         return new LogdModule(this, name);
     }
     logMessage(message) {
+        const hasErrorObject = message.hasErrorObject();
         const logsEnabled = this.logger.logsEnabled();
-        if (!logsEnabled)
+        if (!logsEnabled && !hasErrorObject)
             return;
         const enabledLogLevel = this.logger.getEnabledLogLevel();
         const messageLogLevel = message.getLogLevel().value;
-        if (messageLogLevel < enabledLogLevel)
+        if (messageLogLevel < enabledLogLevel && !hasErrorObject)
             return;
-        const frames = ErrorStackParser.parse(new Error('reference'));
-        if (frames.length > 2)
-            message.setCallsite(frames[2]);
+        // no callsite in the browser required
+        if (this.env === 'node') {
+            const frames = ErrorStackParser.parse(new Error('reference'));
+            if (frames.length > 2)
+                message.setCallsite(frames[2]);
+        }
         if (this.logger.isLoaded()) {
             this.logger.log(message);
         }
