@@ -18,10 +18,18 @@ export default class BrowserLogger extends Logger {
 
     private _logsEnabled: boolean = false;
     private _enabledLogLevel: number = 0;
-
+    private readonly STORAGE_KEY = 'logd_config';
 
     constructor() {
         super();
+
+        // Load configuration from localStorage
+        const storedConfig = localStorage.getItem(this.STORAGE_KEY);
+        if (storedConfig) {
+            const config = JSON.parse(storedConfig);
+            this._logsEnabled = config.enabled;
+            this._enabledLogLevel = config.level;
+        }
 
         // @ts-ignore
         window.logd = {
@@ -33,11 +41,20 @@ export default class BrowserLogger extends Logger {
                         this._enabledLogLevel = levelConfig.value;
                     }
                 }
+                this.saveConfig();
             },
             disable: () => {
                 this._logsEnabled = false;
+                this.saveConfig();
             },
         };
+    }
+
+    private saveConfig(): void {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
+            enabled: this._logsEnabled,
+            level: this._enabledLogLevel
+        }));
     }
 
     public getEnabledLogLevel() : number {
