@@ -42,8 +42,6 @@ export default class BrowserLogger extends Logger {
                 this.saveConfig();
             },
         };
-    }
-    async load() {
         this.setLoaded();
     }
     saveConfig() {

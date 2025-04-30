@@ -17,15 +17,13 @@ export default class Logd {
     constructor() {
         if (this.env === 'node') {
             this.logger = new NodeLogger();
-            this.logger.load().then(() => {
-                this.processQueue();
-            });
         } else {
             this.logger = new BrowserLogger();
-            this.logger.load().then(() => {
-                this.processQueue();
-            });
         }
+
+        this.logger.load().then(() => {
+            this.processQueue();
+        });
     }
 
 
@@ -46,8 +44,6 @@ export default class Logd {
         if (frames.length > 2) message.setCallsite(frames[2]);
 
         if (this.logger.isLoaded()) {
-            this.processQueue();
-
             this.logger.log(message);
         } else {
             this.messageQueue.push(message);

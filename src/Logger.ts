@@ -5,12 +5,10 @@ import LogMessage from './LogMessage.js';
 
 export default class Logger {
 
-
     private loaded: boolean = false;
 
     public async load() : Promise<void> {
-        if (this.loaded) return;
-        this.loaded = true;
+        this.setLoaded();
     }
 
     public setLoaded() {

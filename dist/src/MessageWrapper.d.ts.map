@@ -1,1 +1,0 @@
-{"version":3,"file":"MessageWrapper.d.ts","sourceRoot":"","sources":["../../src/MessageWrapper.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,cAAc,CAAC;AAGnC,MAAM,CAAC,OAAO,OAAO,cAAc;IAG/B,OAAO,CAAC,EAAE,OAAO,CAAC;gBAGN,OAAO,CAAC,EAAE,OAAO;IAW7B;;;;;;MAME;IACF,GAAG,CAAC,GAAG,EAAE,MAAM;CAIlB"}

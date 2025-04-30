@@ -1,9 +1,7 @@
 export default class Logger {
     loaded = false;
     async load() {
-        if (this.loaded)
-            return;
-        this.loaded = true;
+        this.setLoaded();
     }
     setLoaded() {
         this.loaded = true;
