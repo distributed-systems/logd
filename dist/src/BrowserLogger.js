@@ -43,6 +43,9 @@ export default class BrowserLogger extends Logger {
             },
         };
     }
+    async load() {
+        this.setLoaded();
+    }
     saveConfig() {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
             enabled: this._logsEnabled,

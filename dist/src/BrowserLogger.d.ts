@@ -6,6 +6,7 @@ export default class BrowserLogger extends Logger {
     private _enabledLogLevel;
     private readonly STORAGE_KEY;
     constructor();
+    load(): Promise<void>;
     private saveConfig;
     getEnabledLogLevel(): number;
     logsEnabled(): boolean;

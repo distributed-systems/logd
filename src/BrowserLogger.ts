@@ -50,6 +50,10 @@ export default class BrowserLogger extends Logger {
         };
     }
 
+    public async load() : Promise<void> {
+        this.setLoaded();
+    }
+
     private saveConfig(): void {
         localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
             enabled: this._logsEnabled,
