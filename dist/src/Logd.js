@@ -9,10 +9,15 @@ export default class Logd {
     constructor() {
         if (this.env === 'node') {
             this.logger = new NodeLogger();
-            this.logger.load();
+            this.logger.load().then(() => {
+                this.processQueue();
+            });
         }
         else {
             this.logger = new BrowserLogger();
+            this.logger.load().then(() => {
+                this.processQueue();
+            });
         }
     }
     module(name) {
@@ -30,16 +35,19 @@ export default class Logd {
         if (frames.length > 2)
             message.setCallsite(frames[2]);
         if (this.logger.isLoaded()) {
-            if (this.messageQueue.length > 0) {
-                for (const msg of this.messageQueue) {
-                    this.logger.log(msg);
-                }
-                this.messageQueue.length = 0;
-            }
+            this.processQueue();
             this.logger.log(message);
         }
         else {
             this.messageQueue.push(message);
+        }
+    }
+    processQueue() {
+        if (this.messageQueue.length > 0) {
+            for (const msg of this.messageQueue) {
+                this.logger.log(msg);
+            }
+            this.messageQueue.length = 0;
         }
     }
 }

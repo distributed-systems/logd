@@ -7,5 +7,6 @@ export default class Logd {
     constructor();
     module(name: string): LogdModule;
     logMessage(message: LogMessage): void;
+    private processQueue;
 }
 //# sourceMappingURL=Logd.d.ts.map
