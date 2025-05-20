@@ -90,7 +90,11 @@ export default class BrowserLogger extends Logger {
         const logPrefix = `${timestamp} [${moduleName}]:`;
 
         // Log with the styled prefix and values
-        console.log(`%c${logPrefix}`, style, ...values);
+        if (values.length === 0) {
+            console.log(`%c${logPrefix}`, style);
+        } else {
+            console.log(`%c${logPrefix} %c${values.join(' ')}`, style, '');
+        }
     }
 
     /**
