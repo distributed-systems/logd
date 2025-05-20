@@ -73,15 +73,8 @@ export default class BrowserLogger extends Logger {
         const style = this.getStyleForLevel(logLevel);
         // Build the formatted prefix
         const logPrefix = `${timestamp} [${moduleName}]:`;
-        // Apply the same style to all values
-        const styledValues = values.map(value => {
-            if (typeof value === 'string') {
-                return `%c${value}`;
-            }
-            return value;
-        });
-        // Use %c to apply our custom style to all text
-        console.log(`%c${logPrefix}`, style, ...styledValues.map(v => typeof v === 'string' ? style : v));
+        // Log with the styled prefix and values
+        console.log(`%c${logPrefix}`, style, ...values);
     }
     /**
      * Converts our chalk-style color string (e.g. "yellow.bold" or "magenta.bold.bgWhite")
