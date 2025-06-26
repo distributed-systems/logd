@@ -89,11 +89,28 @@ export default class BrowserLogger extends Logger {
         // Build the formatted prefix
         const logPrefix = `${timestamp} [${moduleName}]:`;
 
-        // Log with the styled prefix and values
-        if (values.length === 0) {
+        // Check if there are error objects in the values
+        if (message.hasErrorObject()) {
+            // Log the prefix with formatting
             console.log(`%c${logPrefix}`, style);
+            
+            // Log each value separately, handling errors specially
+            values.forEach(value => {
+                if (value instanceof Error) {
+                    // Log error objects without formatting to preserve stack traces
+                    console.error(value);
+                } else {
+                    // Log non-error values with formatting
+                    console.log(`%c${value}`, '');
+                }
+            });
         } else {
-            console.log(`%c${logPrefix} %c${values.join(' ')}`, style, '');
+            // No error objects, use the original logging format
+            if (values.length === 0) {
+                console.log(`%c${logPrefix}`, style);
+            } else {
+                console.log(`%c${logPrefix} %c${values.join(' ')}`, style, '');
+            }
         }
     }
 
