@@ -9,6 +9,8 @@ export default class BrowserLogger extends Logger {
     private saveConfig;
     getEnabledLogLevel(): number;
     logsEnabled(): boolean;
+    enableLogs(): void;
+    disableLogs(): void;
     log(message: LogMessage): void;
     /**
      * Converts our chalk-style color string (e.g. "yellow.bold" or "magenta.bold.bgWhite")

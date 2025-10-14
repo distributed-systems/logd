@@ -56,6 +56,12 @@ export default class BrowserLogger extends Logger {
     logsEnabled() {
         return this._logsEnabled;
     }
+    enableLogs() {
+        this._logsEnabled = true;
+    }
+    disableLogs() {
+        this._logsEnabled = false;
+    }
     log(message) {
         // Create a timestamp in the format: dd HH:MM:SS.mss
         const now = new Date();
