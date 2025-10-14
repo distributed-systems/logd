@@ -2,6 +2,8 @@ import LogMessage from './LogMessage.js';
 export default class Logger {
     private loaded;
     load(): Promise<void>;
+    enableLogs(): void;
+    disableLogs(): void;
     setLoaded(): void;
     isLoaded(): boolean;
     log(message: LogMessage): void;

@@ -6,6 +6,8 @@ export default class Logd {
     private readonly messageQueue;
     constructor();
     module(name: string): LogdModule;
+    enableLogs(): void;
+    disableLogs(): void;
     logMessage(message: LogMessage): void;
     private processQueue;
 }

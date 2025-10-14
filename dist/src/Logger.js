@@ -3,6 +3,12 @@ export default class Logger {
     async load() {
         this.setLoaded();
     }
+    enableLogs() {
+        throw new Error('Method not implemented.');
+    }
+    disableLogs() {
+        throw new Error('Method not implemented.');
+    }
     setLoaded() {
         this.loaded = true;
     }

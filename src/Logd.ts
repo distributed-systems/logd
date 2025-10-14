@@ -31,6 +31,13 @@ export default class Logd {
         return new LogdModule(this, name);
     }
 
+    public enableLogs() : void {
+        this.logger.enableLogs();
+    }
+    public disableLogs() : void {
+        this.logger.disableLogs();
+    }
+
 
     public logMessage(message: LogMessage) {
         const hasErrorObject = message.hasErrorObject();

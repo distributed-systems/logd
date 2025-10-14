@@ -11,6 +11,14 @@ export default class Logger {
         this.setLoaded();
     }
 
+    public enableLogs() : void {
+        throw new Error('Method not implemented.');
+    }
+
+    public disableLogs() : void {
+        throw new Error('Method not implemented.');
+    }
+
     public setLoaded() {
         this.loaded = true;
     }

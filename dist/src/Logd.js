@@ -20,6 +20,12 @@ export default class Logd {
     module(name) {
         return new LogdModule(this, name);
     }
+    enableLogs() {
+        this.logger.enableLogs();
+    }
+    disableLogs() {
+        this.logger.disableLogs();
+    }
     logMessage(message) {
         const hasErrorObject = message.hasErrorObject();
         const logsEnabled = this.logger.logsEnabled();
