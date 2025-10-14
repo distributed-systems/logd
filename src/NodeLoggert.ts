@@ -31,6 +31,16 @@ export default class NodeLogger extends Logger {
     }
 
 
+    public enableLogs() : void {
+        this._logsEnabled = true;
+    }
+
+
+    public disableLogs() : void {
+        this._logsEnabled = false;
+    }
+
+
     public getEnabledLogLevel() : number {
         if (this._enabledLogLevel !== undefined) {
             return this._enabledLogLevel;

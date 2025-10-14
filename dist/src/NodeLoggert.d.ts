@@ -8,6 +8,8 @@ export default class NodeLogger extends Logger {
     constructor();
     load(): Promise<void>;
     logsEnabled(): boolean;
+    enableLogs(): void;
+    disableLogs(): void;
     getEnabledLogLevel(): number;
     log(message: LogMessage): void;
     private truncatePath;

@@ -20,6 +20,12 @@ export default class NodeLogger extends Logger {
         this._logsEnabled = process.argv.includes('--log') || process.argv.includes('--l');
         return this._logsEnabled;
     }
+    enableLogs() {
+        this._logsEnabled = true;
+    }
+    disableLogs() {
+        this._logsEnabled = false;
+    }
     getEnabledLogLevel() {
         if (this._enabledLogLevel !== undefined) {
             return this._enabledLogLevel;
